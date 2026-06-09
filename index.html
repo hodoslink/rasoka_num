@@ -588,30 +588,59 @@ function analyze(domain, spf, dmarc, dkim, dkimSel) {
   else                                    { spfS='ok';              spfH='SPF correct';         spfD='Seuls vos serveurs autorisés peuvent envoyer en votre nom.'; }
   checks.push({name:'SPF',status:spfS,head:spfH,detail:spfD});
 
-  // DMARC
-  let dmS, dmH, dmD;
-  if (!dmarc)                             { dmS='fail'; score-=40; dmH='DMARC absent';          dmD='Sans DMARC, les emails frauduleux atteignent vos clients sans filtrage.'; }
-  else if (dmarc.includes('p=none'))      { dmS='warn'; score-=20; dmH='DMARC en surveillance'; dmD='Mode "none" : surveille sans bloquer. Aucune protection réelle.'; }
-  else if (dmarc.includes('p=quarantine')){ dmS='warn'; score-=5;  dmH='DMARC en quarantaine';  dmD='Bien. Les suspects vont en spam. Passer à "reject" pour le max.'; }
-  else                                    { dmS='ok';              dmH='DMARC en rejet';         dmD='Protection maximale : les faux emails sont rejetés avant livraison.'; }
-  checks.push({name:'DMARC',status:dmS,head:dmH,detail:dmD});
+  // DMARC — 4 niveaux distincts
+  let dmS, dmH, dmD, dmLevel='';
+  if (!dmarc) {
+    dmS='fail'; score-=40; dmLevel='critical';
+    dmH='DMARC absent';
+    dmD='Sans DMARC, n\'importe qui peut envoyer des emails en votre nom et ils arriveront en boîte de réception sans aucun filtrage.';
+  } else if (dmarc.includes('p=none')) {
+    dmS='warn'; score-=18; dmLevel='none';
+    dmH='DMARC en mode surveillance uniquement';
+    dmD='Mode "p=none" : votre domaine est surveillé mais pas protégé. Les emails frauduleux passent quand même. C\'est un point de départ, pas une protection.';
+  } else if (dmarc.includes('p=quarantine')) {
+    dmS='ok'; score-=4; dmLevel='quarantine';
+    dmH='DMARC en quarantaine — bonne protection';
+    dmD='Les emails suspects vont en dossier spam plutôt qu\'en boîte principale. Bonne configuration. Une politique "reject" offrirait une protection maximale, mais ce niveau est déjà sérieux.';
+  } else {
+    dmS='ok'; dmLevel='reject';
+    dmH='DMARC en rejet — protection maximale';
+    dmD='Les emails frauduleux sont rejetés avant même d\'atteindre vos clients. Configuration optimale.';
+  }
+  checks.push({name:'DMARC', status:dmS, head:dmH, detail:dmD, dmLevel});
 
   // DKIM
   let dkS, dkH, dkD;
-  if (!dkim) { dkS='warn'; score-=15; dkH='DKIM non détecté'; dkD='Aucune signature numérique trouvée. Vos emails peuvent être altérés en transit.'; }
-  else       { dkS='ok';              dkH=`DKIM présent (${dkimSel})`; dkD='Vos emails sont signés numériquement. Toute modification sera détectée.'; }
-  checks.push({name:'DKIM',status:dkS,head:dkH,detail:dkD});
+  if (!dkim) {
+    dkS='warn'; score-=15;
+    dkH='DKIM non détecté';
+    dkD='Aucune signature numérique trouvée sur les sélecteurs courants. Vos emails peuvent être modifiés en transit sans que personne ne le sache. (Note : certains hébergeurs utilisent des sélecteurs non standards — un audit complet le confirmerait.)';
+  } else {
+    dkS='ok';
+    dkH=`DKIM présent (sélecteur : ${dkimSel})`;
+    dkD='Vos emails portent une signature numérique. Toute modification en transit sera détectée automatiquement.';
+  }
+  checks.push({name:'DKIM', status:dkS, head:dkH, detail:dkD});
 
   score = Math.max(0, Math.min(100, score));
-  const level = score>=85?'safe':score>=55?'medium':'danger';
-  const colors = {safe:'#4ADE80', medium:'#FCD34D', danger:'#F87171'};
-  const labels = {safe:'Protégé ✓', medium:'Partiel ⚠', danger:'Vulnérable ✗'};
+
+  // Niveau global — tient compte du cas quarantine
+  const dmarcLevel = checks.find(c=>c.name==='DMARC').dmLevel;
+  let level;
+  if (score >= 88)                                  level = 'safe';
+  else if (score >= 70 || dmarcLevel==='quarantine') level = 'good';   // nouveau niveau
+  else if (score >= 50)                             level = 'medium';
+  else                                              level = 'danger';
+
+  const colors  = {safe:'#4ADE80', good:'#86EFAC', medium:'#FCD34D', danger:'#F87171'};
+  const labels  = {safe:'Protégé ✓', good:'Bon niveau ↗', medium:'Partiel ⚠', danger:'Vulnérable ✗'};
   const verdicts = {
-    safe:'Votre configuration email est solide. Vos clients sont protégés.',
-    medium:'Des lacunes subsistent. Un attaquant peut encore exploiter ces failles.',
-    danger:'Domaine exposé. Des arnaques peuvent être menées en votre nom dès maintenant.'
+    safe:   'Configuration solide. Vos trois protections email sont en place et actives.',
+    good:   'Bonne protection en place. Un ajustement mineur permettrait d\'atteindre le niveau optimal.',
+    medium: 'Protection incomplète. Des lacunes permettent encore des usurpations partielles.',
+    danger: 'Domaine exposé. Des arnaques peuvent être menées en votre nom dès maintenant.'
   };
-  return {score, checks, level, color:colors[level], label:labels[level], verdict:verdicts[level]};
+  return {score, checks, level, color:colors[level], label:labels[level], verdict:verdicts[level], dmarcLevel};
 }
 
 function renderCheckerResults(domain, a) {
@@ -640,25 +669,40 @@ function renderCheckerResults(domain, a) {
     checksEl.appendChild(row);
   });
 
-  // CTA
+  // CTA — 4 niveaux
   const cta = document.getElementById('c-cta-block');
   if (a.level === 'safe') {
     cta.innerHTML = `
       <div class="c-cta safe">
-        <div class="c-cta-title">Bonne configuration !</div>
-        <div class="c-cta-text">Vos protections email sont en place. Vous souhaitez un audit web complet ?</div>
+        <div class="c-cta-title">Configuration optimale ✓</div>
+        <div class="c-cta-text">Vos trois protections email sont actives. Vos clients sont protégés contre l'usurpation d'identité. Vous souhaitez un audit de sécurité plus complet de votre site ?</div>
+        <div class="c-cta-btns"><a href="#contact" class="c-btn-main">Nous contacter</a></div>
+      </div>`;
+  } else if (a.level === 'good') {
+    cta.innerHTML = `
+      <div class="c-cta safe">
+        <div class="c-cta-title">Bonne base — un ajustement suffit</div>
+        <div class="c-cta-text">Votre configuration est sérieuse. ${a.dmarcLevel==='quarantine' ? 'Passer votre DMARC de "quarantine" à "reject" bloquerait complètement les faux emails au lieu de les mettre en spam.' : 'Un correctif mineur vous amènerait au niveau optimal.'} On peut s'en charger rapidement.</div>
         <div class="c-cta-btns">
-          <a href="#contact" class="c-btn-main">Nous contacter</a>
+          <a href="#offres" class="c-btn-main">Voir l'offre correction (300€) →</a>
+          <button class="c-btn-sec" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Nous contacter</button>
+        </div>
+      </div>`;
+  } else if (a.level === 'medium') {
+    cta.innerHTML = `
+      <div class="c-cta danger">
+        <div class="c-cta-title">Protection incomplète</div>
+        <div class="c-cta-text">Votre configuration a des lacunes. Des usurpations partielles restent possibles — vos clients peuvent recevoir des faux emails en votre nom dans certains cas.</div>
+        <div class="c-cta-btns">
+          <a href="#offres" class="c-btn-main">Voir le package 450€ →</a>
+          <button class="c-btn-sec" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Commencer par l'audit (150€)</button>
         </div>
       </div>`;
   } else {
-    const urgency = a.level==='danger'
-      ? 'Des failles critiques exposent vos clients à des arnaques en votre nom.'
-      : 'Votre protection est incomplète. Des correctifs sont nécessaires.';
     cta.innerHTML = `
       <div class="c-cta danger">
-        <div class="c-cta-title">Action recommandée</div>
-        <div class="c-cta-text">${urgency} Nous pouvons corriger ça pour vous.</div>
+        <div class="c-cta-title">⚠ Action urgente recommandée</div>
+        <div class="c-cta-text">Des failles critiques exposent vos clients à des arnaques en votre nom dès aujourd'hui. Votre domaine n'a pas les protections de base. Nous pouvons corriger ça en 48h.</div>
         <div class="c-cta-btns">
           <a href="#offres" class="c-btn-main">Voir le package 450€ →</a>
           <button class="c-btn-sec" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Commencer par l'audit (150€)</button>
