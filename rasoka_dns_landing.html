@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rasoka Numérique — Protection Email & DNS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #1B2D4F;
+  --blue:   #2563EB;
+  --sky:    #EFF6FF;
+  --teal:   #0D9488;
+  --white:  #FFFFFF;
+  --off:    #F8FAFC;
+  --ink:    #1E293B;
+  --muted:  #64748B;
+  --border: #CBD5E1;
+  --accent: #F59E0B;
+  --panel:  #0F172A;
+  --green:  #16A34A;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Nunito',sans-serif;
+  color:var(--ink); background:var(--white);
+  overflow-x:hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:radial-gradient(circle,#94A3B8 1px,transparent 1px);
+  background-size:28px 28px; opacity:.15; pointer-events:none; z-index:0;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; width:100%; z-index:100;
+  background:var(--navy); padding:.75rem 2.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { font-family:'Bangers',cursive; font-size:1.6rem; color:var(--white); letter-spacing:2px; }
+.nav-logo span { color:var(--accent); }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a { font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.65); text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--white); }
+
+/* HERO */
+.hero {
+  min-height:100vh; padding-top:64px;
+  background:var(--navy); position:relative; overflow:hidden;
+  display:flex; align-items:center;
+}
+.hero::after {
+  content:''; position:absolute; inset:0;
+  background:repeating-conic-gradient(from 0deg at 65% 50%,transparent 0deg,transparent 4deg,rgba(255,255,255,.012) 4deg,rgba(255,255,255,.012) 4.5deg);
+  pointer-events:none;
+}
+.hero-inner {
+  position:relative; z-index:2; max-width:1100px; margin:0 auto;
+  padding:5rem 2.5rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+}
+.chapter-tag {
+  display:inline-block;
+  background:rgba(245,158,11,.15); color:var(--accent);
+  font-family:'Bangers',cursive; font-size:.8rem; letter-spacing:3px;
+  padding:4px 14px; border:1px solid rgba(245,158,11,.3); border-radius:2px;
+  margin-bottom:1.2rem;
+}
+.hero h1 {
+  font-family:'Bangers',cursive; font-size:clamp(2.4rem,5vw,4rem);
+  color:var(--white); line-height:1.1; letter-spacing:2px; margin-bottom:1.2rem;
+}
+.hero h1 em { font-style:normal; color:var(--accent); }
+.hero-sub { font-size:1rem; color:rgba(255,255,255,.65); line-height:1.7; margin-bottom:2.2rem; max-width:420px; }
+.btn-primary {
+  display:inline-block; background:var(--blue); color:var(--white);
+  font-weight:800; font-size:.9rem; letter-spacing:1px; text-transform:uppercase;
+  padding:.85rem 2.2rem; border-radius:4px; text-decoration:none;
+  transition:background .2s, transform .15s; cursor:pointer; border:none;
+}
+.btn-primary:hover { background:#1D4ED8; transform:translateY(-2px); }
+
+/* Hero threat card */
+.hero-card {
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:2rem; backdrop-filter:blur(6px);
+}
+.hero-card-title {
+  font-family:'Bangers',cursive; font-size:.85rem; letter-spacing:3px;
+  color:var(--accent); margin-bottom:1.4rem; text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.8rem;
+}
+.threat-item {
+  display:flex; align-items:flex-start; gap:1rem;
+  padding:.9rem 1rem; background:rgba(255,255,255,.04);
+  border-radius:8px; border:1px solid rgba(255,255,255,.07); margin-bottom:.8rem;
+}
+.threat-icon { font-size:1.6rem; line-height:1; flex-shrink:0; }
+.threat-text { font-size:.8rem; color:rgba(255,255,255,.65); line-height:1.5; }
+.threat-text strong { color:var(--white); display:block; margin-bottom:.2rem; font-size:.85rem; }
+
+/* SECTION SHELL */
+section { position:relative; z-index:1; }
+.section-inner { max-width:1100px; margin:0 auto; padding:5rem 2.5rem; }
+.section-eyebrow { font-family:'Bangers',cursive; font-size:.75rem; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:.6rem; display:block; }
+.section-title { font-family:'Bangers',cursive; font-size:clamp(1.8rem,3.5vw,2.8rem); letter-spacing:1.5px; line-height:1.15; color:var(--navy); margin-bottom:.6rem; }
+.section-title em { font-style:normal; color:var(--blue); }
+.section-sub { font-size:.95rem; color:var(--muted); max-width:560px; line-height:1.7; margin-bottom:3rem; }
+
+/* EXPLAIN SECTION */
+#comprendre { background:var(--off); border-top:1px solid var(--border); }
+
+.explain-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem;
+}
+
+.explain-card {
+  background:var(--white); border:1.5px solid var(--border);
+  border-radius:12px; padding:2rem 1.5rem;
+  transition:border-color .2s, box-shadow .2s;
+}
+.explain-card:hover { border-color:var(--blue); box-shadow:0 8px 24px rgba(37,99,235,.08); }
+
+.explain-icon { font-size:2.2rem; margin-bottom:1rem; display:block; }
+
+.explain-label {
+  font-size:.65rem; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; display:block;
+}
+
+.explain-card h3 { font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:1px; color:var(--navy); margin-bottom:.8rem; }
+
+.speech-bubble {
+  position:relative; background:var(--sky); border:1.5px solid #BFDBFE;
+  border-radius:8px; padding:.9rem 1.1rem; margin-bottom:1rem;
+  font-weight:700; font-size:.85rem; line-height:1.5; color:var(--navy);
+}
+.speech-bubble::after {
+  content:''; position:absolute; bottom:-10px; left:20px;
+  border:5px solid transparent; border-top:5px solid #BFDBFE;
+}
+
+.explain-body { font-size:.85rem; line-height:1.7; color:#475569; }
+.explain-body strong { color:var(--navy); }
+
+.stat-chip {
+  display:inline-block; margin-top:1rem;
+  background:rgba(37,99,235,.08); color:var(--blue);
+  font-size:.7rem; font-weight:700; letter-spacing:.5px;
+  padding:4px 12px; border-radius:99px;
+}
+
+/* OFFRES */
+#offres { background:var(--navy); border-top:1px solid rgba(255,255,255,.05); }
+#offres .section-title { color:var(--white); }
+#offres .section-eyebrow { color:var(--accent); }
+#offres .section-sub { color:rgba(255,255,255,.5); }
+
+/* Toggle */
+.toggle-wrap {
+  display:flex; align-items:center; gap:1rem;
+  margin-bottom:3rem;
+}
+.toggle-label { font-weight:700; font-size:.9rem; color:rgba(255,255,255,.6); }
+.toggle-label.active { color:var(--white); }
+.toggle {
+  width:52px; height:28px; background:rgba(255,255,255,.15);
+  border-radius:99px; position:relative; cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.2); transition:background .25s;
+  flex-shrink:0;
+}
+.toggle.on { background:var(--blue); border-color:var(--blue); }
+.toggle-knob {
+  width:20px; height:20px; background:var(--white); border-radius:50%;
+  position:absolute; top:3px; left:3px; transition:left .25s;
+}
+.toggle.on .toggle-knob { left:25px; }
+.toggle-badge {
+  background:var(--accent); color:var(--ink);
+  font-size:.7rem; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px;
+}
+
+/* Package */
+.package-card {
+  background:rgba(255,255,255,.05); border:2px solid var(--accent);
+  border-radius:16px; padding:2.5rem;
+  display:none;
+  box-shadow:0 24px 56px rgba(0,0,0,.3);
+}
+.package-card.visible { display:block; }
+
+.package-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin-bottom:2rem; flex-wrap:wrap; gap:1rem;
+}
+.package-left {}
+.package-tag { font-family:'Bangers',cursive; font-size:.75rem; letter-spacing:3px; color:var(--accent); display:block; margin-bottom:.4rem; }
+.package-title { font-family:'Bangers',cursive; font-size:2.2rem; letter-spacing:2px; color:var(--white); }
+.package-tagline { font-size:.9rem; color:rgba(255,255,255,.5); margin-top:.3rem; font-style:italic; }
+.package-price-block { text-align:right; }
+.package-price { font-family:'Bangers',cursive; font-size:3rem; color:var(--accent); line-height:1; }
+.package-price-sub { font-size:.75rem; color:rgba(255,255,255,.4); margin-top:.2rem; }
+
+.package-steps {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.5px; background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08); border-radius:10px; overflow:hidden;
+  margin-bottom:2rem;
+}
+.pkg-step {
+  background:rgba(255,255,255,.04); padding:1.5rem;
+  display:flex; flex-direction:column; gap:.5rem;
+}
+.pkg-step-num { font-family:'Bangers',cursive; font-size:2rem; color:rgba(255,255,255,.15); line-height:1; }
+.pkg-step-title { font-family:'Bangers',cursive; font-size:1rem; letter-spacing:1px; color:var(--white); }
+.pkg-step-price { font-weight:800; font-size:.85rem; color:var(--accent); }
+.pkg-step-desc { font-size:.78rem; color:rgba(255,255,255,.5); line-height:1.5; }
+.pkg-step-check { list-style:none; margin-top:.5rem; }
+.pkg-step-check li { font-size:.75rem; color:rgba(255,255,255,.6); line-height:1.8; }
+.pkg-step-check li::before { content:'✓ '; color:var(--teal); font-weight:800; }
+
+.package-cta {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1rem;
+}
+.package-saving {
+  background:rgba(22,163,74,.2); border:1px solid rgba(22,163,74,.3);
+  color:#4ADE80; font-size:.8rem; font-weight:700;
+  padding:.5rem 1.2rem; border-radius:99px;
+}
+
+/* Séparé */
+.separate-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+  display:none;
+}
+.separate-grid.visible { display:grid; }
+
+.sep-card {
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  border-radius:12px; padding:2rem 1.5rem;
+  transition:border-color .2s, transform .2s;
+}
+.sep-card:hover { border-color:rgba(255,255,255,.3); transform:translateY(-4px); }
+
+.sep-num { font-family:'Bangers',cursive; font-size:3rem; color:rgba(255,255,255,.1); line-height:1; margin-bottom:.5rem; }
+.sep-tag { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.4rem; }
+.sep-title { font-family:'Bangers',cursive; font-size:1.4rem; letter-spacing:1px; color:var(--white); margin-bottom:.3rem; }
+.sep-tagline { font-size:.8rem; color:rgba(255,255,255,.45); font-style:italic; margin-bottom:1rem; }
+.sep-price { font-family:'Bangers',cursive; font-size:2.2rem; color:var(--white); }
+.sep-price-sub { font-size:.7rem; color:rgba(255,255,255,.35); margin-bottom:1.2rem; }
+.sep-list { list-style:none; font-size:.8rem; line-height:1.9; color:rgba(255,255,255,.6); }
+.sep-list li::before { content:'✓ '; color:var(--teal); font-weight:800; }
+
+/* PROCESSUS */
+#processus { background:var(--white); border-top:1px solid var(--border); }
+.process-strip { display:grid; grid-template-columns:repeat(4,1fr); border:1.5px solid var(--border); border-radius:12px; overflow:hidden; }
+.process-step { padding:2rem 1.5rem; border-right:1px solid var(--border); }
+.process-step:last-child { border-right:none; }
+.step-num { font-family:'Bangers',cursive; font-size:3rem; color:var(--sky); -webkit-text-stroke:2px var(--blue); line-height:1; margin-bottom:.8rem; }
+.step-title { font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:1px; color:var(--navy); margin-bottom:.5rem; }
+.step-desc { font-size:.82rem; line-height:1.6; color:var(--muted); }
+
+/* GLOSSAIRE */
+#glossaire { background:var(--off); border-top:1px solid var(--border); }
+.glossaire-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; }
+.gloss-card { height:130px; perspective:800px; cursor:pointer; }
+.gloss-inner { width:100%; height:100%; transition:transform .45s; transform-style:preserve-3d; position:relative; }
+.gloss-card:hover .gloss-inner, .gloss-card.flipped .gloss-inner { transform:rotateY(180deg); }
+.gloss-front, .gloss-back { position:absolute; inset:0; backface-visibility:hidden; border:1.5px solid var(--border); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; text-align:center; }
+.gloss-front { background:var(--white); }
+.gloss-term { font-family:'Bangers',cursive; font-size:1.5rem; color:var(--navy); letter-spacing:1px; margin-bottom:.3rem; }
+.gloss-hint { font-size:.65rem; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.gloss-back { background:var(--navy); color:var(--white); transform:rotateY(180deg); border-color:var(--navy); }
+.gloss-def { font-size:.75rem; line-height:1.5; color:rgba(255,255,255,.8); }
+
+/* FOOTER */
+footer { background:var(--panel); border-top:3px solid var(--blue); padding:3.5rem 2rem; text-align:center; }
+.footer-logo { font-family:'Bangers',cursive; font-size:2rem; color:var(--white); letter-spacing:2px; margin-bottom:1rem; display:block; }
+.footer-logo span { color:var(--accent); }
+footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-width:480px; margin:0 auto 1.5rem; }
+.footer-email { display:inline-block; font-weight:700; font-size:.9rem; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:2px; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  .hero-inner { grid-template-columns:1fr; }
+  .hero-card { display:none; }
+  .explain-grid { grid-template-columns:1fr; }
+  .package-steps, .separate-grid { grid-template-columns:1fr; }
+  .process-strip { grid-template-columns:1fr 1fr; }
+  .nav-links { display:none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">RASOKA <span>NUMÉRIQUE</span></div>
+  <ul class="nav-links">
+    <li><a href="#comprendre">Comprendre</a></li>
+    <li><a href="#offres">Offres</a></li>
+    <li><a href="#processus">Méthode</a></li>
+    <li><a href="#glossaire">Glossaire</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="chapter-tag">⚡ SPÉCIALISTE EMAIL & DNS</div>
+      <h1>Quelqu'un peut envoyer<br>des emails<br><em>à votre place.</em></h1>
+      <p class="hero-sub">Sans le savoir, votre domaine permet peut-être à n'importe qui de se faire passer pour vous — et d'arnaquer vos clients en votre nom. Nous corrigeons ça.</p>
+      <a href="#comprendre" class="btn-primary">Comprendre le risque →</a>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">🎯 Ce que nous avons constaté</div>
+      <div class="threat-item">
+        <div class="threat-icon">📧</div>
+        <div class="threat-text"><strong>116 domaines vulnérables</strong>sur 239 sites audités permettent l'usurpation d'identité email — sans que leurs propriétaires le sachent.</div>
+      </div>
+      <div class="threat-item">
+        <div class="threat-icon">🎭</div>
+        <div class="threat-text"><strong>Comptables, notaires, labos</strong>sont les secteurs les plus ciblés : leurs clients font confiance à leurs emails, ce qui les rend idéaux pour les arnaques.</div>
+      </div>
+      <div class="threat-item">
+        <div class="threat-icon">⚡</div>
+        <div class="threat-text"><strong>Correction en 48h</strong>dans la majorité des cas. Pas besoin de changer d'hébergeur ni de refaire votre site.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPRENDRE -->
+<section id="comprendre">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">📖 Comprendre — Sans jargon</span>
+      <h2 class="section-title">SPF, DMARC, DKIM :<br><em>à quoi ça sert vraiment ?</em></h2>
+      <p class="section-sub">Trois protocoles invisibles qui protègent votre identité email. La plupart des propriétaires de sites n'en ont jamais entendu parler — jusqu'au jour où ça pose problème.</p>
+    </div>
+    <div class="explain-grid reveal">
+
+      <div class="explain-card">
+        <span class="explain-icon">📋</span>
+        <span class="explain-label">SPF — Sender Policy Framework</span>
+        <h3>La liste des autorisés</h3>
+        <div class="speech-bubble">« Imaginez un vigile à l'entrée de votre bureau avec la liste des personnes autorisées à parler en votre nom… »</div>
+        <p class="explain-body">SPF est une liste publiée dans votre DNS qui indique quels serveurs ont le droit d'envoyer des emails depuis votre adresse.<br><br>
+        <strong>Sans SPF :</strong> n'importe quel serveur dans le monde peut prétendre être le vôtre. Vos emails légitimes finissent en spam.</p>
+        <span class="stat-chip">Manquant sur 42% des sites audités</span>
+      </div>
+
+      <div class="explain-card">
+        <span class="explain-icon">🔏</span>
+        <span class="explain-label">DKIM — DomainKeys Identified Mail</span>
+        <h3>La signature du notaire</h3>
+        <div class="speech-bubble">« Comme un cachet officiel sur un courrier : il prouve que c'est bien vous qui l'avez envoyé, et qu'il n'a pas été modifié. »</div>
+        <p class="explain-body">DKIM ajoute une signature numérique invisible à chaque email. Le serveur destinataire peut vérifier que l'email vient bien de vous et n'a pas été altéré en chemin.<br><br>
+        <strong>Sans DKIM :</strong> vos emails peuvent être interceptés et modifiés sans que personne ne le remarque.</p>
+        <span class="stat-chip">Absent sur la majorité des petits sites</span>
+      </div>
+
+      <div class="explain-card">
+        <span class="explain-icon">🚦</span>
+        <span class="explain-label">DMARC — Domain-based Message Authentication</span>
+        <h3>La politique de blocage</h3>
+        <div class="speech-bubble">« C'est le chef de la sécurité : il décide quoi faire des emails suspects — les mettre en quarantaine ou les rejeter complètement. »</div>
+        <p class="explain-body">DMARC s'appuie sur SPF et DKIM pour définir ce que les serveurs doivent faire si un email échoue aux vérifications : le laisser passer, le mettre en spam, ou le bloquer.<br><br>
+        <strong>Sans DMARC :</strong> même avec SPF et DKIM, les emails frauduleux peuvent toujours atteindre vos clients.</p>
+        <span class="stat-chip">116 domaines concernés sur 239 audités</span>
+      </div>
+
+    </div>
+
+    <!-- Consequence block -->
+    <div class="reveal" style="margin-top:2.5rem;">
+      <div style="background:var(--navy);border-radius:12px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+        <div>
+          <div style="font-family:'Bangers',cursive;font-size:.75rem;letter-spacing:3px;color:var(--accent);margin-bottom:.6rem;">⚠️ CONSÉQUENCE CONCRÈTE</div>
+          <h3 style="font-family:'Bangers',cursive;font-size:1.8rem;color:var(--white);letter-spacing:1px;margin-bottom:1rem;">Ce que risquent vos clients</h3>
+          <p style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;">Sans ces trois protections, un escroc peut envoyer un email qui semble provenir de <em style="color:var(--white);">votre adresse exacte</em> — demandant un virement, un mot de passe, ou des documents confidentiels.<br><br>Vos clients ne voient aucune différence. Vous ne le saurez jamais.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem;">
+          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1rem;">
+            <div style="font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">Exemple réel</div>
+            <div style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.5;">Un cabinet comptable reçoit un appel d'un client : « J'ai viré 3 000€ suite à votre email… » — L'email venait d'un escroc, pas du cabinet.</div>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1rem;">
+            <div style="font-size:.75rem;font-weight:700;color:var(--teal);margin-bottom:.3rem;">Avec SPF + DKIM + DMARC</div>
+            <div style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.5;">Cet email n'aurait jamais atteint la boîte de réception du client. Bloqué automatiquement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFFRES -->
+<section id="offres">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">💼 Nos offres</span>
+      <h2 class="section-title">Protection email DNS :<br><em>choisissez votre formule</em></h2>
+      <p class="section-sub">Un package complet ou étape par étape — selon vos besoins et votre organisation.</p>
+    </div>
+
+    <!-- Toggle -->
+    <div class="toggle-wrap reveal">
+      <span class="toggle-label active" id="lbl-package">Package complet</span>
+      <div class="toggle" id="offreToggle" onclick="toggleOffre()">
+        <div class="toggle-knob"></div>
+      </div>
+      <span class="toggle-label" id="lbl-separate">À la carte</span>
+      <span class="toggle-badge">Économisez jusqu'à 200€ avec le package</span>
+    </div>
+
+    <!-- PACKAGE -->
+    <div class="package-card visible reveal" id="packageView">
+      <div class="package-header">
+        <div class="package-left">
+          <span class="package-tag">⭐ PACKAGE PROTECTION EMAIL COMPLÈTE</span>
+          <div class="package-title">Audit + Plan + Correction</div>
+          <div class="package-tagline">Tout est inclus. On s'occupe de tout, de A à Z.</div>
+        </div>
+        <div class="package-price-block">
+          <div class="package-price">450 – 850€</div>
+          <div class="package-price-sub">TTC · délai 5 à 10 jours ouvrés</div>
+        </div>
+      </div>
+      <div class="package-steps">
+        <div class="pkg-step">
+          <div class="pkg-step-num">01</div>
+          <div class="pkg-step-title">Audit DNS</div>
+          <div class="pkg-step-price">inclus (valeur 150–250€)</div>
+          <div class="pkg-step-desc">Analyse complète de votre configuration SPF, DKIM et DMARC. On vous dit exactement ce qui manque et pourquoi.</div>
+          <ul class="pkg-step-check">
+            <li>Vérification SPF</li>
+            <li>Vérification DKIM</li>
+            <li>Vérification DMARC</li>
+            <li>Rapport de diagnostic PDF</li>
+          </ul>
+        </div>
+        <div class="pkg-step">
+          <div class="pkg-step-num">02</div>
+          <div class="pkg-step-title">Plan de remédiation</div>
+          <div class="pkg-step-price">inclus (valeur 100–200€)</div>
+          <div class="pkg-step-desc">On traduit le diagnostic en actions concrètes, prêtes à transmettre à votre hébergeur ou à appliquer vous-même.</div>
+          <ul class="pkg-step-check">
+            <li>Instructions pas à pas</li>
+            <li>Adapté à votre hébergeur</li>
+            <li>Priorisé par risque</li>
+          </ul>
+        </div>
+        <div class="pkg-step">
+          <div class="pkg-step-num">03</div>
+          <div class="pkg-step-title">Réalisation du correctif</div>
+          <div class="pkg-step-price">inclus (valeur 300–600€)</div>
+          <div class="pkg-step-desc">On configure SPF, DKIM et DMARC directement pour vous. Vous n'avez rien à faire — sauf nous donner accès à votre DNS.</div>
+          <ul class="pkg-step-check">
+            <li>Configuration complète</li>
+            <li>Test de validation</li>
+            <li>Attestation de conformité</li>
+          </ul>
+        </div>
+      </div>
+      <div class="package-cta">
+        <span class="package-saving">✓ Économie de 100 à 200€ vs. à la carte</span>
+        <a href="#contact" class="btn-primary">Demander un devis →</a>
+      </div>
+    </div>
+
+    <!-- SÉPARÉ -->
+    <div class="separate-grid" id="separateView">
+
+      <div class="sep-card reveal">
+        <div class="sep-num">01</div>
+        <span class="sep-tag">Étape 1</span>
+        <h3 class="sep-title">Audit DNS</h3>
+        <p class="sep-tagline">« Je veux savoir où j'en suis. »</p>
+        <div class="sep-price">150 – 250€</div>
+        <div class="sep-price-sub">Livraison sous 48h</div>
+        <ul class="sep-list">
+          <li>Analyse SPF, DKIM, DMARC</li>
+          <li>Rapport de diagnostic PDF</li>
+          <li>Score de risque clair</li>
+          <li>Résumé en langage courant</li>
+        </ul>
+      </div>
+
+      <div class="sep-card reveal">
+        <div class="sep-num">02</div>
+        <span class="sep-tag">Étape 2</span>
+        <h3 class="sep-title">Plan de remédiation</h3>
+        <p class="sep-tagline">« Je veux savoir quoi faire. »</p>
+        <div class="sep-price">100 – 200€</div>
+        <div class="sep-price-sub">À commander après l'audit</div>
+        <ul class="sep-list">
+          <li>Instructions détaillées pas à pas</li>
+          <li>Adaptées à votre hébergeur</li>
+          <li>Transmissibles à votre prestataire</li>
+          <li>Priorisées par niveau de risque</li>
+        </ul>
+      </div>
+
+      <div class="sep-card reveal">
+        <div class="sep-num">03</div>
+        <span class="sep-tag">Étape 3</span>
+        <h3 class="sep-title">Réalisation</h3>
+        <p class="sep-tagline">« Je veux que ce soit fait. »</p>
+        <div class="sep-price">300 – 600€</div>
+        <div class="sep-price-sub">Nécessite l'audit au préalable</div>
+        <ul class="sep-list">
+          <li>Configuration SPF, DKIM, DMARC</li>
+          <li>Tests de validation complets</li>
+          <li>Attestation de conformité</li>
+          <li>Garantie 30 jours</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSUS -->
+<section id="processus">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">🗺 Méthode</span>
+      <h2 class="section-title">Comment ça <em>se passe ?</em></h2>
+      <p class="section-sub">Simple, rapide, sans avoir à toucher à votre site.</p>
+    </div>
+    <div class="process-strip reveal">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Vous nous donnez votre domaine</h3>
+        <p class="step-desc">Juste votre nom de domaine (ex. votreentreprise.fr). Aucun accès serveur, aucun mot de passe requis à cette étape.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h3 class="step-title">On analyse votre DNS</h3>
+        <p class="step-desc">On vérifie l'état de vos enregistrements SPF, DKIM et DMARC. On identifie ce qui manque et le niveau de risque.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Rapport clair en 48h</h3>
+        <p class="step-desc">Vous recevez un rapport PDF illustré avec vos résultats, expliqués sans jargon. Vous comprenez exactement ce qui se passe.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Correction & attestation</h3>
+        <p class="step-desc">On configure tout pour vous. Une fois validé, vous recevez une attestation de conformité que vous pouvez montrer à vos clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSAIRE -->
+<section id="glossaire">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-eyebrow">📚 Glossaire — Les mots qu'on entend sans comprendre</span>
+      <h2 class="section-title">Le vocabulaire email,<br><em>expliqué simplement</em></h2>
+      <p class="section-sub">Survolez chaque carte. 10 secondes suffisent.</p>
+    </div>
+    <div class="glossaire-grid reveal">
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">SPF</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Liste les serveurs autorisés à envoyer des emails en votre nom. Sans lui, n'importe qui peut se faire passer pour vous.</div></div>
+      </div></div>
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">DKIM</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Signature numérique invisible ajoutée à chaque email. Prouve que l'email vient bien de vous et n'a pas été modifié.</div></div>
+      </div></div>
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">DMARC</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Décide quoi faire des emails suspects : les laisser passer, les mettre en spam ou les bloquer. Le chef d'orchestre de la sécurité email.</div></div>
+      </div></div>
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">DNS</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Annuaire d'internet. C'est là que sont publiées vos règles SPF, DKIM et DMARC. On peut les lire sans toucher à votre site.</div></div>
+      </div></div>
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">Usurpation</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Quand quelqu'un envoie un email en se faisant passer pour vous. Vos clients voient votre nom et votre adresse — mais c'est un escroc.</div></div>
+      </div></div>
+      <div class="gloss-card"><div class="gloss-inner">
+        <div class="gloss-front"><div class="gloss-term">Phishing</div><div class="gloss-hint">↩ survoler</div></div>
+        <div class="gloss-back"><div class="gloss-def">Arnaque par email qui imite une entreprise de confiance pour voler des informations ou de l'argent. L'usurpation de domaine en est la forme la plus redoutable.</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <span class="footer-logo">RASOKA <span>NUMÉRIQUE</span></span>
+  <p>Protéger votre identité email, c'est protéger<br>la confiance que vos clients placent en vous.</p>
+  <a href="mailto:contact@rasoka-numerique.fr" class="footer-email">contact@rasoka-numerique.fr</a>
+  <p style="margin-top:2.5rem;font-size:.72rem;opacity:.3;">© 2025 Rasoka Numérique · Audit sécurité DNS & Email · Mentions légales</p>
+</footer>
+
+<script>
+let isPackage = true;
+
+function toggleOffre() {
+  isPackage = !isPackage;
+  const toggle = document.getElementById('offreToggle');
+  const pkg = document.getElementById('packageView');
+  const sep = document.getElementById('separateView');
+  const lblPkg = document.getElementById('lbl-package');
+  const lblSep = document.getElementById('lbl-separate');
+
+  toggle.classList.toggle('on', !isPackage);
+  pkg.style.display = isPackage ? 'block' : 'none';
+  sep.style.display = isPackage ? 'none' : 'grid';
+  lblPkg.classList.toggle('active', isPackage);
+  lblSep.classList.toggle('active', !isPackage);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.gloss-card').forEach(c => {
+  c.addEventListener('click', () => c.classList.toggle('flipped'));
+});
+</script>
+</body>
+</html>
