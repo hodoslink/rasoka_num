@@ -7,292 +7,191 @@
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy:   #1B2D4F;
-  --blue:   #2563EB;
-  --sky:    #EFF6FF;
-  --teal:   #0D9488;
-  --white:  #FFFFFF;
-  --off:    #F8FAFC;
-  --ink:    #1E293B;
-  --muted:  #64748B;
-  --border: #CBD5E1;
-  --accent: #F59E0B;
-  --panel:  #0F172A;
-  --green:  #16A34A;
+  --navy:#1B2D4F; --blue:#2563EB; --sky:#EFF6FF;
+  --teal:#0D9488; --white:#FFFFFF; --off:#F8FAFC;
+  --ink:#1E293B; --muted:#64748B; --border:#CBD5E1;
+  --accent:#F59E0B; --panel:#0F172A;
+  --green:#16A34A; --red:#DC2626;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family:'Nunito',sans-serif;
-  color:var(--ink); background:var(--white);
-  overflow-x:hidden;
-}
-body::before {
-  content:''; position:fixed; inset:0;
-  background-image:radial-gradient(circle,#94A3B8 1px,transparent 1px);
-  background-size:28px 28px; opacity:.15; pointer-events:none; z-index:0;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,#94A3B8 1px,transparent 1px);background-size:28px 28px;opacity:.15;pointer-events:none;z-index:0;}
 
 /* NAV */
-nav {
-  position:fixed; top:0; width:100%; z-index:100;
-  background:var(--navy); padding:.75rem 2.5rem;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.nav-logo { font-family:'Bangers',cursive; font-size:1.6rem; color:var(--white); letter-spacing:2px; }
-.nav-logo span { color:var(--accent); }
-.nav-links { display:flex; gap:2rem; list-style:none; }
-.nav-links a { font-size:.82rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.65); text-decoration:none; transition:color .2s; }
-.nav-links a:hover { color:var(--white); }
+nav{position:fixed;top:0;width:100%;z-index:100;background:var(--navy);padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Bangers',cursive;font-size:1.6rem;color:var(--white);letter-spacing:2px;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
 
 /* HERO */
-.hero {
-  min-height:100vh; padding-top:64px;
-  background:var(--navy); position:relative; overflow:hidden;
-  display:flex; align-items:center;
-}
-.hero::after {
-  content:''; position:absolute; inset:0;
-  background:repeating-conic-gradient(from 0deg at 65% 50%,transparent 0deg,transparent 4deg,rgba(255,255,255,.012) 4deg,rgba(255,255,255,.012) 4.5deg);
-  pointer-events:none;
-}
-.hero-inner {
-  position:relative; z-index:2; max-width:1100px; margin:0 auto;
-  padding:5rem 2.5rem;
-  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
-}
-.chapter-tag {
-  display:inline-block;
-  background:rgba(245,158,11,.15); color:var(--accent);
-  font-family:'Bangers',cursive; font-size:.8rem; letter-spacing:3px;
-  padding:4px 14px; border:1px solid rgba(245,158,11,.3); border-radius:2px;
-  margin-bottom:1.2rem;
-}
-.hero h1 {
-  font-family:'Bangers',cursive; font-size:clamp(2.4rem,5vw,4rem);
-  color:var(--white); line-height:1.1; letter-spacing:2px; margin-bottom:1.2rem;
-}
-.hero h1 em { font-style:normal; color:var(--accent); }
-.hero-sub { font-size:1rem; color:rgba(255,255,255,.65); line-height:1.7; margin-bottom:2.2rem; max-width:420px; }
-.btn-primary {
-  display:inline-block; background:var(--blue); color:var(--white);
-  font-weight:800; font-size:.9rem; letter-spacing:1px; text-transform:uppercase;
-  padding:.85rem 2.2rem; border-radius:4px; text-decoration:none;
-  transition:background .2s, transform .15s; cursor:pointer; border:none;
-}
-.btn-primary:hover { background:#1D4ED8; transform:translateY(-2px); }
+.hero{min-height:100vh;padding-top:64px;background:var(--navy);position:relative;overflow:hidden;display:flex;align-items:center;}
+.hero::after{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 65% 50%,transparent 0deg,transparent 4deg,rgba(255,255,255,.012) 4deg,rgba(255,255,255,.012) 4.5deg);pointer-events:none;}
+.hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:4rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.chapter-tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);font-family:'Bangers',cursive;font-size:.8rem;letter-spacing:3px;padding:4px 14px;border:1px solid rgba(245,158,11,.3);border-radius:2px;margin-bottom:1.2rem;}
+.hero h1{font-family:'Bangers',cursive;font-size:clamp(2.4rem,5vw,4rem);color:var(--white);line-height:1.1;letter-spacing:2px;margin-bottom:1.2rem;}
+.hero h1 em{font-style:normal;color:var(--accent);}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:2.2rem;max-width:420px;}
+.btn-primary{display:inline-block;background:var(--blue);color:var(--white);font-weight:800;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;padding:.85rem 2.2rem;border-radius:4px;text-decoration:none;transition:background .2s,transform .15s;cursor:pointer;border:none;}
+.btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);}
 
-/* Hero threat card */
-.hero-card {
-  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
-  border-radius:12px; padding:2rem; backdrop-filter:blur(6px);
-}
-.hero-card-title {
-  font-family:'Bangers',cursive; font-size:.85rem; letter-spacing:3px;
-  color:var(--accent); margin-bottom:1.4rem; text-transform:uppercase;
-  border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.8rem;
-}
-.threat-item {
-  display:flex; align-items:flex-start; gap:1rem;
-  padding:.9rem 1rem; background:rgba(255,255,255,.04);
-  border-radius:8px; border:1px solid rgba(255,255,255,.07); margin-bottom:.8rem;
-}
-.threat-icon { font-size:1.6rem; line-height:1; flex-shrink:0; }
-.threat-text { font-size:.8rem; color:rgba(255,255,255,.65); line-height:1.5; }
-.threat-text strong { color:var(--white); display:block; margin-bottom:.2rem; font-size:.85rem; }
+/* ── CHECKER CARD (remplace hero-card) ── */
+.checker-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.8rem;backdrop-filter:blur(6px);}
+.checker-card-title{font-family:'Bangers',cursive;font-size:.85rem;letter-spacing:3px;color:var(--accent);margin-bottom:1.2rem;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:.8rem;}
+.check-form{display:flex;gap:0;margin-bottom:.6rem;}
+.domain-input{flex:1;padding:.9rem 1.1rem;border:1.5px solid rgba(255,255,255,.2);border-right:none;border-radius:6px 0 0 6px;background:rgba(255,255,255,.08);color:var(--white);font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:600;outline:none;transition:border-color .2s;}
+.domain-input::placeholder{color:rgba(255,255,255,.3);}
+.domain-input:focus{border-color:var(--accent);}
+.check-btn{padding:.9rem 1.4rem;background:var(--accent);color:var(--ink);border:none;border-radius:0 6px 6px 0;font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;cursor:pointer;transition:background .2s,transform .15s;white-space:nowrap;}
+.check-btn:hover{background:#E08E00;}
+.check-btn:disabled{background:#64748B;cursor:not-allowed;}
+.checker-note{font-size:.68rem;color:rgba(255,255,255,.28);margin-bottom:1.2rem;}
 
-/* SECTION SHELL */
-section { position:relative; z-index:1; }
-.section-inner { max-width:1100px; margin:0 auto; padding:5rem 2.5rem; }
-.section-eyebrow { font-family:'Bangers',cursive; font-size:.75rem; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:.6rem; display:block; }
-.section-title { font-family:'Bangers',cursive; font-size:clamp(1.8rem,3.5vw,2.8rem); letter-spacing:1.5px; line-height:1.15; color:var(--navy); margin-bottom:.6rem; }
-.section-title em { font-style:normal; color:var(--blue); }
-.section-sub { font-size:.95rem; color:var(--muted); max-width:560px; line-height:1.7; margin-bottom:3rem; }
+/* Loading steps */
+.c-loading{display:none;padding:.8rem 0;}
+.c-spinner{width:28px;height:28px;border:3px solid rgba(37,99,235,.2);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .8rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.c-steps{display:flex;flex-direction:column;gap:.35rem;}
+.c-step{font-size:.75rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:.5rem;}
+.c-step.done{color:#4ADE80;}
+.c-step.active{color:var(--accent);font-weight:700;}
 
-/* EXPLAIN SECTION */
-#comprendre { background:var(--off); border-top:1px solid var(--border); }
+/* Mini results */
+.c-results{display:none;}
+.c-score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.c-score-badge{font-family:'Bangers',cursive;font-size:2.4rem;line-height:1;}
+.c-verdict{font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:200px;}
+.c-checks{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.2rem;}
+.c-check-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border-radius:6px;padding:.55rem .8rem;border:1px solid rgba(255,255,255,.06);}
+.c-check-name{font-family:'Bangers',cursive;font-size:.95rem;color:var(--white);letter-spacing:1px;}
+.c-check-status{font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 9px;border-radius:99px;}
+.c-check-status.ok{background:#DCFCE7;color:#16A34A;}
+.c-check-status.warn{background:#FEF3C7;color:#D97706;}
+.c-check-status.fail{background:#FEE2E2;color:#DC2626;}
+.c-check-detail{font-size:.7rem;color:rgba(255,255,255,.45);margin-top:.15rem;padding:0 .8rem .55rem;}
 
-.explain-grid {
-  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem;
-}
+/* CTA mini */
+.c-cta{border-radius:8px;padding:1rem 1.2rem;}
+.c-cta.danger{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);}
+.c-cta.safe{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);}
+.c-cta-title{font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;margin-bottom:.35rem;}
+.c-cta.danger .c-cta-title{color:#FCA5A5;}
+.c-cta.safe .c-cta-title{color:#4ADE80;}
+.c-cta-text{font-size:.73rem;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:.8rem;}
+.c-cta-btns{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;}
+.c-btn-main{background:var(--accent);color:var(--ink);font-family:'Bangers',cursive;font-size:.85rem;letter-spacing:1px;padding:.5rem 1.2rem;border-radius:4px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s;}
+.c-btn-main:hover{background:#E08E00;}
+.c-btn-sec{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.5);background:none;border:none;cursor:pointer;text-decoration:underline;}
+.c-retry{font-size:.7rem;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;margin-top:.8rem;display:block;text-align:center;text-decoration:underline;}
 
-.explain-card {
-  background:var(--white); border:1.5px solid var(--border);
-  border-radius:12px; padding:2rem 1.5rem;
-  transition:border-color .2s, box-shadow .2s;
-}
-.explain-card:hover { border-color:var(--blue); box-shadow:0 8px 24px rgba(37,99,235,.08); }
+/* SECTIONS */
+section{position:relative;z-index:1;}
+.section-inner{max-width:1100px;margin:0 auto;padding:5rem 2.5rem;}
+.section-eyebrow{font-family:'Bangers',cursive;font-size:.75rem;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:.6rem;display:block;}
+.section-title{font-family:'Bangers',cursive;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:1.5px;line-height:1.15;color:var(--navy);margin-bottom:.6rem;}
+.section-title em{font-style:normal;color:var(--blue);}
+.section-sub{font-size:.95rem;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:3rem;}
 
-.explain-icon { font-size:2.2rem; margin-bottom:1rem; display:block; }
-
-.explain-label {
-  font-size:.65rem; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; display:block;
-}
-
-.explain-card h3 { font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:1px; color:var(--navy); margin-bottom:.8rem; }
-
-.speech-bubble {
-  position:relative; background:var(--sky); border:1.5px solid #BFDBFE;
-  border-radius:8px; padding:.9rem 1.1rem; margin-bottom:1rem;
-  font-weight:700; font-size:.85rem; line-height:1.5; color:var(--navy);
-}
-.speech-bubble::after {
-  content:''; position:absolute; bottom:-10px; left:20px;
-  border:5px solid transparent; border-top:5px solid #BFDBFE;
-}
-
-.explain-body { font-size:.85rem; line-height:1.7; color:#475569; }
-.explain-body strong { color:var(--navy); }
-
-.stat-chip {
-  display:inline-block; margin-top:1rem;
-  background:rgba(37,99,235,.08); color:var(--blue);
-  font-size:.7rem; font-weight:700; letter-spacing:.5px;
-  padding:4px 12px; border-radius:99px;
-}
+/* COMPRENDRE */
+#comprendre{background:var(--off);border-top:1px solid var(--border);}
+.explain-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;}
+.explain-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:2rem 1.5rem;transition:border-color .2s,box-shadow .2s;}
+.explain-card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(37,99,235,.08);}
+.explain-icon{font-size:2.2rem;margin-bottom:1rem;display:block;}
+.explain-label{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:block;}
+.explain-card h3{font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:1px;color:var(--navy);margin-bottom:.8rem;}
+.speech-bubble{position:relative;background:var(--sky);border:1.5px solid #BFDBFE;border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1rem;font-weight:700;font-size:.85rem;line-height:1.5;color:var(--navy);}
+.speech-bubble::after{content:'';position:absolute;bottom:-10px;left:20px;border:5px solid transparent;border-top:5px solid #BFDBFE;}
+.explain-body{font-size:.85rem;line-height:1.7;color:#475569;}
+.explain-body strong{color:var(--navy);}
+.stat-chip{display:inline-block;margin-top:1rem;background:rgba(37,99,235,.08);color:var(--blue);font-size:.7rem;font-weight:700;letter-spacing:.5px;padding:4px 12px;border-radius:99px;}
 
 /* OFFRES */
-#offres { background:var(--navy); border-top:1px solid rgba(255,255,255,.05); }
-#offres .section-title { color:var(--white); }
-#offres .section-eyebrow { color:var(--accent); }
-#offres .section-sub { color:rgba(255,255,255,.5); }
-
-/* Toggle */
-.toggle-wrap {
-  display:flex; align-items:center; gap:1rem;
-  margin-bottom:3rem;
-}
-.toggle-label { font-weight:700; font-size:.9rem; color:rgba(255,255,255,.6); }
-.toggle-label.active { color:var(--white); }
-.toggle {
-  width:52px; height:28px; background:rgba(255,255,255,.15);
-  border-radius:99px; position:relative; cursor:pointer;
-  border:1.5px solid rgba(255,255,255,.2); transition:background .25s;
-  flex-shrink:0;
-}
-.toggle.on { background:var(--blue); border-color:var(--blue); }
-.toggle-knob {
-  width:20px; height:20px; background:var(--white); border-radius:50%;
-  position:absolute; top:3px; left:3px; transition:left .25s;
-}
-.toggle.on .toggle-knob { left:25px; }
-.toggle-badge {
-  background:var(--accent); color:var(--ink);
-  font-size:.7rem; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px;
-}
-
-/* Package */
-.package-card {
-  background:rgba(255,255,255,.05); border:2px solid var(--accent);
-  border-radius:16px; padding:2.5rem;
-  display:none;
-  box-shadow:0 24px 56px rgba(0,0,0,.3);
-}
-.package-card.visible { display:block; }
-
-.package-header {
-  display:flex; align-items:flex-start; justify-content:space-between;
-  margin-bottom:2rem; flex-wrap:wrap; gap:1rem;
-}
-.package-left {}
-.package-tag { font-family:'Bangers',cursive; font-size:.75rem; letter-spacing:3px; color:var(--accent); display:block; margin-bottom:.4rem; }
-.package-title { font-family:'Bangers',cursive; font-size:2.2rem; letter-spacing:2px; color:var(--white); }
-.package-tagline { font-size:.9rem; color:rgba(255,255,255,.5); margin-top:.3rem; font-style:italic; }
-.package-price-block { text-align:right; }
-.package-price { font-family:'Bangers',cursive; font-size:3rem; color:var(--accent); line-height:1; }
-.package-price-sub { font-size:.75rem; color:rgba(255,255,255,.4); margin-top:.2rem; }
-
-.package-steps {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:1.5px; background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.08); border-radius:10px; overflow:hidden;
-  margin-bottom:2rem;
-}
-.pkg-step {
-  background:rgba(255,255,255,.04); padding:1.5rem;
-  display:flex; flex-direction:column; gap:.5rem;
-}
-.pkg-step-num { font-family:'Bangers',cursive; font-size:2rem; color:rgba(255,255,255,.15); line-height:1; }
-.pkg-step-title { font-family:'Bangers',cursive; font-size:1rem; letter-spacing:1px; color:var(--white); }
-.pkg-step-price { font-weight:800; font-size:.85rem; color:var(--accent); }
-.pkg-step-desc { font-size:.78rem; color:rgba(255,255,255,.5); line-height:1.5; }
-.pkg-step-check { list-style:none; margin-top:.5rem; }
-.pkg-step-check li { font-size:.75rem; color:rgba(255,255,255,.6); line-height:1.8; }
-.pkg-step-check li::before { content:'✓ '; color:var(--teal); font-weight:800; }
-
-.package-cta {
-  display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:1rem;
-}
-.package-saving {
-  background:rgba(22,163,74,.2); border:1px solid rgba(22,163,74,.3);
-  color:#4ADE80; font-size:.8rem; font-weight:700;
-  padding:.5rem 1.2rem; border-radius:99px;
-}
-
-/* Séparé */
-.separate-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
-  display:none;
-}
-.separate-grid.visible { display:grid; }
-
-.sep-card {
-  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
-  border-radius:12px; padding:2rem 1.5rem;
-  transition:border-color .2s, transform .2s;
-}
-.sep-card:hover { border-color:rgba(255,255,255,.3); transform:translateY(-4px); }
-
-.sep-num { font-family:'Bangers',cursive; font-size:3rem; color:rgba(255,255,255,.1); line-height:1; margin-bottom:.5rem; }
-.sep-tag { font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.4rem; }
-.sep-title { font-family:'Bangers',cursive; font-size:1.4rem; letter-spacing:1px; color:var(--white); margin-bottom:.3rem; }
-.sep-tagline { font-size:.8rem; color:rgba(255,255,255,.45); font-style:italic; margin-bottom:1rem; }
-.sep-price { font-family:'Bangers',cursive; font-size:2.2rem; color:var(--white); }
-.sep-price-sub { font-size:.7rem; color:rgba(255,255,255,.35); margin-bottom:1.2rem; }
-.sep-list { list-style:none; font-size:.8rem; line-height:1.9; color:rgba(255,255,255,.6); }
-.sep-list li::before { content:'✓ '; color:var(--teal); font-weight:800; }
+#offres{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);}
+#offres .section-title{color:var(--white);}
+#offres .section-eyebrow{color:var(--accent);}
+#offres .section-sub{color:rgba(255,255,255,.5);}
+.toggle-wrap{display:flex;align-items:center;gap:1rem;margin-bottom:3rem;flex-wrap:wrap;}
+.toggle-label{font-weight:700;font-size:.9rem;color:rgba(255,255,255,.6);}
+.toggle-label.active{color:var(--white);}
+.toggle{width:52px;height:28px;background:rgba(255,255,255,.15);border-radius:99px;position:relative;cursor:pointer;border:1.5px solid rgba(255,255,255,.2);transition:background .25s;flex-shrink:0;}
+.toggle.on{background:var(--blue);border-color:var(--blue);}
+.toggle-knob{width:20px;height:20px;background:var(--white);border-radius:50%;position:absolute;top:3px;left:3px;transition:left .25s;}
+.toggle.on .toggle-knob{left:25px;}
+.toggle-badge{background:var(--accent);color:var(--ink);font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:99px;letter-spacing:.5px;}
+.package-card{background:rgba(255,255,255,.05);border:2px solid var(--accent);border-radius:16px;padding:2.5rem;display:none;box-shadow:0 24px 56px rgba(0,0,0,.3);}
+.package-card.visible{display:block;}
+.package-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+.package-tag{font-family:'Bangers',cursive;font-size:.75rem;letter-spacing:3px;color:var(--accent);display:block;margin-bottom:.4rem;}
+.package-title{font-family:'Bangers',cursive;font-size:2.2rem;letter-spacing:2px;color:var(--white);}
+.package-tagline{font-size:.9rem;color:rgba(255,255,255,.5);margin-top:.3rem;font-style:italic;}
+.package-price-block{text-align:right;}
+.package-price{font-family:'Bangers',cursive;font-size:3rem;color:var(--accent);line-height:1;}
+.package-price-sub{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.2rem;}
+.package-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;margin-bottom:2rem;}
+.pkg-step{background:rgba(255,255,255,.04);padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;}
+.pkg-step-num{font-family:'Bangers',cursive;font-size:2rem;color:rgba(255,255,255,.15);line-height:1;}
+.pkg-step-title{font-family:'Bangers',cursive;font-size:1rem;letter-spacing:1px;color:var(--white);}
+.pkg-step-price{font-weight:800;font-size:.85rem;color:var(--accent);}
+.pkg-step-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;}
+.pkg-step-check{list-style:none;margin-top:.5rem;}
+.pkg-step-check li{font-size:.75rem;color:rgba(255,255,255,.6);line-height:1.8;}
+.pkg-step-check li::before{content:'✓ ';color:var(--teal);font-weight:800;}
+.package-cta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.package-saving{background:rgba(22,163,74,.2);border:1px solid rgba(22,163,74,.3);color:#4ADE80;font-size:.8rem;font-weight:700;padding:.5rem 1.2rem;border-radius:99px;}
+.separate-grid{display:none;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.separate-grid.visible{display:grid;}
+.sep-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:2rem 1.5rem;transition:border-color .2s,transform .2s;}
+.sep-card:hover{border-color:rgba(255,255,255,.3);transform:translateY(-4px);}
+.sep-num{font-family:'Bangers',cursive;font-size:3rem;color:rgba(255,255,255,.1);line-height:1;margin-bottom:.5rem;}
+.sep-tag{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.4rem;}
+.sep-title{font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:1px;color:var(--white);margin-bottom:.3rem;}
+.sep-tagline{font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:1rem;}
+.sep-price{font-family:'Bangers',cursive;font-size:2.2rem;color:var(--white);}
+.sep-price-sub{font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:1.2rem;}
+.sep-list{list-style:none;font-size:.8rem;line-height:1.9;color:rgba(255,255,255,.6);}
+.sep-list li::before{content:'✓ ';color:var(--teal);font-weight:800;}
 
 /* PROCESSUS */
-#processus { background:var(--white); border-top:1px solid var(--border); }
-.process-strip { display:grid; grid-template-columns:repeat(4,1fr); border:1.5px solid var(--border); border-radius:12px; overflow:hidden; }
-.process-step { padding:2rem 1.5rem; border-right:1px solid var(--border); }
-.process-step:last-child { border-right:none; }
-.step-num { font-family:'Bangers',cursive; font-size:3rem; color:var(--sky); -webkit-text-stroke:2px var(--blue); line-height:1; margin-bottom:.8rem; }
-.step-title { font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:1px; color:var(--navy); margin-bottom:.5rem; }
-.step-desc { font-size:.82rem; line-height:1.6; color:var(--muted); }
+#processus{background:var(--white);border-top:1px solid var(--border);}
+.process-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;}
+.process-step{padding:2rem 1.5rem;border-right:1px solid var(--border);}
+.process-step:last-child{border-right:none;}
+.step-num{font-family:'Bangers',cursive;font-size:3rem;color:var(--sky);-webkit-text-stroke:2px var(--blue);line-height:1;margin-bottom:.8rem;}
+.step-title{font-family:'Bangers',cursive;font-size:1.1rem;letter-spacing:1px;color:var(--navy);margin-bottom:.5rem;}
+.step-desc{font-size:.82rem;line-height:1.6;color:var(--muted);}
 
 /* GLOSSAIRE */
-#glossaire { background:var(--off); border-top:1px solid var(--border); }
-.glossaire-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:14px; }
-.gloss-card { height:130px; perspective:800px; cursor:pointer; }
-.gloss-inner { width:100%; height:100%; transition:transform .45s; transform-style:preserve-3d; position:relative; }
-.gloss-card:hover .gloss-inner, .gloss-card.flipped .gloss-inner { transform:rotateY(180deg); }
-.gloss-front, .gloss-back { position:absolute; inset:0; backface-visibility:hidden; border:1.5px solid var(--border); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; text-align:center; }
-.gloss-front { background:var(--white); }
-.gloss-term { font-family:'Bangers',cursive; font-size:1.5rem; color:var(--navy); letter-spacing:1px; margin-bottom:.3rem; }
-.gloss-hint { font-size:.65rem; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
-.gloss-back { background:var(--navy); color:var(--white); transform:rotateY(180deg); border-color:var(--navy); }
-.gloss-def { font-size:.75rem; line-height:1.5; color:rgba(255,255,255,.8); }
+#glossaire{background:var(--off);border-top:1px solid var(--border);}
+.glossaire-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+.gloss-card{height:130px;perspective:800px;cursor:pointer;}
+.gloss-inner{width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d;position:relative;}
+.gloss-card:hover .gloss-inner,.gloss-card.flipped .gloss-inner{transform:rotateY(180deg);}
+.gloss-front,.gloss-back{position:absolute;inset:0;backface-visibility:hidden;border:1.5px solid var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;}
+.gloss-front{background:var(--white);}
+.gloss-term{font-family:'Bangers',cursive;font-size:1.5rem;color:var(--navy);letter-spacing:1px;margin-bottom:.3rem;}
+.gloss-hint{font-size:.65rem;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.gloss-back{background:var(--navy);color:var(--white);transform:rotateY(180deg);border-color:var(--navy);}
+.gloss-def{font-size:.75rem;line-height:1.5;color:rgba(255,255,255,.8);}
 
 /* FOOTER */
-footer { background:var(--panel); border-top:3px solid var(--blue); padding:3.5rem 2rem; text-align:center; }
-.footer-logo { font-family:'Bangers',cursive; font-size:2rem; color:var(--white); letter-spacing:2px; margin-bottom:1rem; display:block; }
-.footer-logo span { color:var(--accent); }
-footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-width:480px; margin:0 auto 1.5rem; }
-.footer-email { display:inline-block; font-weight:700; font-size:.9rem; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:2px; }
+footer{background:var(--panel);border-top:3px solid var(--blue);padding:3.5rem 2rem;text-align:center;}
+.footer-logo{font-family:'Bangers',cursive;font-size:2rem;color:var(--white);letter-spacing:2px;margin-bottom:1rem;display:block;}
+.footer-logo span{color:var(--accent);}
+footer p{color:rgba(255,255,255,.45);font-size:.88rem;line-height:1.8;max-width:480px;margin:0 auto 1.5rem;}
+.footer-email{display:inline-block;font-weight:700;font-size:.9rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:2px;}
 
 /* REVEAL */
-.reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-@media(max-width:900px) {
-  .hero-inner { grid-template-columns:1fr; }
-  .hero-card { display:none; }
-  .explain-grid { grid-template-columns:1fr; }
-  .package-steps, .separate-grid { grid-template-columns:1fr; }
-  .process-strip { grid-template-columns:1fr 1fr; }
-  .nav-links { display:none; }
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .explain-grid{grid-template-columns:1fr;}
+  .package-steps,.separate-grid{grid-template-columns:1fr;}
+  .process-strip{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
 }
 </style>
 </head>
@@ -312,28 +211,59 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
+
+    <!-- Texte gauche -->
     <div class="hero-text">
       <div class="chapter-tag">⚡ SPÉCIALISTE EMAIL & DNS</div>
       <h1>Quelqu'un peut envoyer<br>des emails<br><em>à votre place.</em></h1>
-      <p class="hero-sub">Sans le savoir, votre domaine permet peut-être à n'importe qui de se faire passer pour vous — et d'arnaquer vos clients en votre nom. Nous corrigeons ça.</p>
+      <p class="hero-sub">Sans le savoir, votre domaine permet peut-être à n'importe qui de se faire passer pour vous — et d'arnaquer vos clients en votre nom. Vérifiez en 10 secondes.</p>
       <a href="#comprendre" class="btn-primary">Comprendre le risque →</a>
-      <a href="https://hodoslink.github.io/rasoka_num/rasoka_dns_checker" class="btn-primary">Vérifiez gratuitement votre domaine →</a>
     </div>
-    <div class="hero-card">
-      <div class="hero-card-title">🎯 Ce que nous avons constaté</div>
-      <div class="threat-item">
-        <div class="threat-icon">📧</div>
-        <div class="threat-text"><strong>116 domaines vulnérables</strong>sur 239 sites audités permettent l'usurpation d'identité email — sans que leurs propriétaires le sachent.</div>
+
+    <!-- Checker interactif droite -->
+    <div class="checker-card">
+      <div class="checker-card-title">🔍 Vérifiez votre domaine — Gratuit</div>
+
+      <div class="check-form">
+        <input type="text" class="domain-input" id="domainInput"
+          placeholder="votreentreprise.fr"
+          autocomplete="off" spellcheck="false"/>
+        <button class="check-btn" id="checkBtn" onclick="startCheck()">ANALYSER →</button>
       </div>
-      <div class="threat-item">
-        <div class="threat-icon">🎭</div>
-        <div class="threat-text"><strong>Comptables, notaires, labos</strong>sont les secteurs les plus ciblés : leurs clients font confiance à leurs emails, ce qui les rend idéaux pour les arnaques.</div>
+      <div class="checker-note">🔒 Aucune donnée stockée · Analyse DNS publique · 100% gratuit</div>
+
+      <!-- État initial -->
+      <div id="c-idle" style="text-align:center;padding:.8rem 0 .2rem;">
+        <div style="font-size:.75rem;color:rgba(255,255,255,.3);">Entrez votre domaine pour lancer l'analyse SPF · DKIM · DMARC</div>
       </div>
-      <div class="threat-item">
-        <div class="threat-icon">⚡</div>
-        <div class="threat-text"><strong>Correction en 48h</strong>dans la majorité des cas. Pas besoin de changer d'hébergeur ni de refaire votre site.</div>
+
+      <!-- Loading -->
+      <div class="c-loading" id="c-loading">
+        <div class="c-spinner"></div>
+        <div class="c-steps">
+          <div class="c-step" id="cs1">⏳ Vérification SPF…</div>
+          <div class="c-step" id="cs2">⏳ Vérification DMARC…</div>
+          <div class="c-step" id="cs3">⏳ Vérification DKIM…</div>
+          <div class="c-step" id="cs4">⏳ Calcul du score…</div>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      <div class="c-results" id="c-results">
+        <div class="c-score-row">
+          <div>
+            <div style="font-family:'Bangers',cursive;font-size:.7rem;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:.2rem;" id="c-domain-lbl"></div>
+            <div class="c-score-badge" id="c-score-badge"></div>
+          </div>
+          <div class="c-verdict" id="c-verdict"></div>
+        </div>
+
+        <div class="c-checks" id="c-checks"></div>
+        <div id="c-cta-block"></div>
+        <button class="c-retry" onclick="resetChecker()">← Analyser un autre domaine</button>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -346,40 +276,35 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
       <p class="section-sub">Trois protocoles invisibles qui protègent votre identité email. La plupart des propriétaires de sites n'en ont jamais entendu parler — jusqu'au jour où ça pose problème.</p>
     </div>
     <div class="explain-grid reveal">
-
       <div class="explain-card">
         <span class="explain-icon">📋</span>
         <span class="explain-label">SPF — Sender Policy Framework</span>
         <h3>La liste des autorisés</h3>
-        <div class="speech-bubble">« Imaginez un vigile à l'entrée de votre bureau avec la liste des personnes autorisées à parler en votre nom… »</div>
+        <div class="speech-bubble">« Imaginez un vigile avec la liste des personnes autorisées à parler en votre nom… »</div>
         <p class="explain-body">SPF est une liste publiée dans votre DNS qui indique quels serveurs ont le droit d'envoyer des emails depuis votre adresse.<br><br>
         <strong>Sans SPF :</strong> n'importe quel serveur dans le monde peut prétendre être le vôtre. Vos emails légitimes finissent en spam.</p>
         <span class="stat-chip">Manquant sur 42% des sites audités</span>
       </div>
-
       <div class="explain-card">
         <span class="explain-icon">🔏</span>
         <span class="explain-label">DKIM — DomainKeys Identified Mail</span>
         <h3>La signature du notaire</h3>
-        <div class="speech-bubble">« Comme un cachet officiel sur un courrier : il prouve que c'est bien vous qui l'avez envoyé, et qu'il n'a pas été modifié. »</div>
+        <div class="speech-bubble">« Comme un cachet officiel sur un courrier : il prouve que c'est bien vous, et qu'il n'a pas été modifié. »</div>
         <p class="explain-body">DKIM ajoute une signature numérique invisible à chaque email. Le serveur destinataire peut vérifier que l'email vient bien de vous et n'a pas été altéré en chemin.<br><br>
         <strong>Sans DKIM :</strong> vos emails peuvent être interceptés et modifiés sans que personne ne le remarque.</p>
         <span class="stat-chip">Absent sur la majorité des petits sites</span>
       </div>
-
       <div class="explain-card">
         <span class="explain-icon">🚦</span>
         <span class="explain-label">DMARC — Domain-based Message Authentication</span>
         <h3>La politique de blocage</h3>
-        <div class="speech-bubble">« C'est le chef de la sécurité : il décide quoi faire des emails suspects — les mettre en quarantaine ou les rejeter complètement. »</div>
+        <div class="speech-bubble">« C'est le chef de la sécurité : il décide quoi faire des emails suspects — quarantaine ou rejet. »</div>
         <p class="explain-body">DMARC s'appuie sur SPF et DKIM pour définir ce que les serveurs doivent faire si un email échoue aux vérifications : le laisser passer, le mettre en spam, ou le bloquer.<br><br>
         <strong>Sans DMARC :</strong> même avec SPF et DKIM, les emails frauduleux peuvent toujours atteindre vos clients.</p>
         <span class="stat-chip">116 domaines concernés sur 239 audités</span>
       </div>
-
     </div>
 
-    <!-- Consequence block -->
     <div class="reveal" style="margin-top:2.5rem;">
       <div style="background:var(--navy);border-radius:12px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
         <div>
@@ -399,7 +324,6 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -411,18 +335,12 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
       <h2 class="section-title">Protection email DNS :<br><em>choisissez votre formule</em></h2>
       <p class="section-sub">Un package complet ou étape par étape — selon vos besoins et votre organisation.</p>
     </div>
-
-    <!-- Toggle -->
     <div class="toggle-wrap reveal">
       <span class="toggle-label active" id="lbl-package">Package complet</span>
-      <div class="toggle" id="offreToggle" onclick="toggleOffre()">
-        <div class="toggle-knob"></div>
-      </div>
+      <div class="toggle" id="offreToggle" onclick="toggleOffre()"><div class="toggle-knob"></div></div>
       <span class="toggle-label" id="lbl-separate">À la carte</span>
       <span class="toggle-badge">Économisez jusqu'à 200€ avec le package</span>
     </div>
-
-    <!-- PACKAGE -->
     <div class="package-card visible reveal" id="packageView">
       <div class="package-header">
         <div class="package-left">
@@ -441,34 +359,21 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
           <div class="pkg-step-title">Audit DNS</div>
           <div class="pkg-step-price">inclus (valeur 150–250€)</div>
           <div class="pkg-step-desc">Analyse complète de votre configuration SPF, DKIM et DMARC. On vous dit exactement ce qui manque et pourquoi.</div>
-          <ul class="pkg-step-check">
-            <li>Vérification SPF</li>
-            <li>Vérification DKIM</li>
-            <li>Vérification DMARC</li>
-            <li>Rapport de diagnostic PDF</li>
-          </ul>
+          <ul class="pkg-step-check"><li>Vérification SPF</li><li>Vérification DKIM</li><li>Vérification DMARC</li><li>Rapport de diagnostic PDF</li></ul>
         </div>
         <div class="pkg-step">
           <div class="pkg-step-num">02</div>
           <div class="pkg-step-title">Plan de remédiation</div>
           <div class="pkg-step-price">inclus (valeur 100–200€)</div>
           <div class="pkg-step-desc">On traduit le diagnostic en actions concrètes, prêtes à transmettre à votre hébergeur ou à appliquer vous-même.</div>
-          <ul class="pkg-step-check">
-            <li>Instructions pas à pas</li>
-            <li>Adapté à votre hébergeur</li>
-            <li>Priorisé par risque</li>
-          </ul>
+          <ul class="pkg-step-check"><li>Instructions pas à pas</li><li>Adapté à votre hébergeur</li><li>Priorisé par risque</li></ul>
         </div>
         <div class="pkg-step">
           <div class="pkg-step-num">03</div>
           <div class="pkg-step-title">Réalisation du correctif</div>
           <div class="pkg-step-price">inclus (valeur 300–600€)</div>
           <div class="pkg-step-desc">On configure SPF, DKIM et DMARC directement pour vous. Vous n'avez rien à faire — sauf nous donner accès à votre DNS.</div>
-          <ul class="pkg-step-check">
-            <li>Configuration complète</li>
-            <li>Test de validation</li>
-            <li>Attestation de conformité</li>
-          </ul>
+          <ul class="pkg-step-check"><li>Configuration complète</li><li>Test de validation</li><li>Attestation de conformité</li></ul>
         </div>
       </div>
       <div class="package-cta">
@@ -476,10 +381,7 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
         <a href="#contact" class="btn-primary">Demander un devis →</a>
       </div>
     </div>
-
-    <!-- SÉPARÉ -->
     <div class="separate-grid" id="separateView">
-
       <div class="sep-card reveal">
         <div class="sep-num">01</div>
         <span class="sep-tag">Étape 1</span>
@@ -487,14 +389,8 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
         <p class="sep-tagline">« Je veux savoir où j'en suis. »</p>
         <div class="sep-price">150 – 250€</div>
         <div class="sep-price-sub">Livraison sous 48h</div>
-        <ul class="sep-list">
-          <li>Analyse SPF, DKIM, DMARC</li>
-          <li>Rapport de diagnostic PDF</li>
-          <li>Score de risque clair</li>
-          <li>Résumé en langage courant</li>
-        </ul>
+        <ul class="sep-list"><li>Analyse SPF, DKIM, DMARC</li><li>Rapport de diagnostic PDF</li><li>Score de risque clair</li><li>Résumé en langage courant</li></ul>
       </div>
-
       <div class="sep-card reveal">
         <div class="sep-num">02</div>
         <span class="sep-tag">Étape 2</span>
@@ -502,14 +398,8 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
         <p class="sep-tagline">« Je veux savoir quoi faire. »</p>
         <div class="sep-price">100 – 200€</div>
         <div class="sep-price-sub">À commander après l'audit</div>
-        <ul class="sep-list">
-          <li>Instructions détaillées pas à pas</li>
-          <li>Adaptées à votre hébergeur</li>
-          <li>Transmissibles à votre prestataire</li>
-          <li>Priorisées par niveau de risque</li>
-        </ul>
+        <ul class="sep-list"><li>Instructions détaillées pas à pas</li><li>Adaptées à votre hébergeur</li><li>Transmissibles à votre prestataire</li><li>Priorisées par niveau de risque</li></ul>
       </div>
-
       <div class="sep-card reveal">
         <div class="sep-num">03</div>
         <span class="sep-tag">Étape 3</span>
@@ -517,14 +407,8 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
         <p class="sep-tagline">« Je veux que ce soit fait. »</p>
         <div class="sep-price">300 – 600€</div>
         <div class="sep-price-sub">Nécessite l'audit au préalable</div>
-        <ul class="sep-list">
-          <li>Configuration SPF, DKIM, DMARC</li>
-          <li>Tests de validation complets</li>
-          <li>Attestation de conformité</li>
-          <li>Garantie 30 jours</li>
-        </ul>
+        <ul class="sep-list"><li>Configuration SPF, DKIM, DMARC</li><li>Tests de validation complets</li><li>Attestation de conformité</li><li>Garantie 30 jours</li></ul>
       </div>
-
     </div>
   </div>
 </section>
@@ -571,30 +455,12 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
       <p class="section-sub">Survolez chaque carte. 10 secondes suffisent.</p>
     </div>
     <div class="glossaire-grid reveal">
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">SPF</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Liste les serveurs autorisés à envoyer des emails en votre nom. Sans lui, n'importe qui peut se faire passer pour vous.</div></div>
-      </div></div>
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">DKIM</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Signature numérique invisible ajoutée à chaque email. Prouve que l'email vient bien de vous et n'a pas été modifié.</div></div>
-      </div></div>
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">DMARC</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Décide quoi faire des emails suspects : les laisser passer, les mettre en spam ou les bloquer. Le chef d'orchestre de la sécurité email.</div></div>
-      </div></div>
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">DNS</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Annuaire d'internet. C'est là que sont publiées vos règles SPF, DKIM et DMARC. On peut les lire sans toucher à votre site.</div></div>
-      </div></div>
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">Usurpation</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Quand quelqu'un envoie un email en se faisant passer pour vous. Vos clients voient votre nom et votre adresse — mais c'est un escroc.</div></div>
-      </div></div>
-      <div class="gloss-card"><div class="gloss-inner">
-        <div class="gloss-front"><div class="gloss-term">Phishing</div><div class="gloss-hint">↩ survoler</div></div>
-        <div class="gloss-back"><div class="gloss-def">Arnaque par email qui imite une entreprise de confiance pour voler des informations ou de l'argent. L'usurpation de domaine en est la forme la plus redoutable.</div></div>
-      </div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">SPF</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Liste les serveurs autorisés à envoyer des emails en votre nom. Sans lui, n'importe qui peut se faire passer pour vous.</div></div></div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">DKIM</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Signature numérique invisible ajoutée à chaque email. Prouve que l'email vient bien de vous et n'a pas été modifié.</div></div></div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">DMARC</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Décide quoi faire des emails suspects : les laisser passer, les mettre en spam ou les bloquer. Le chef d'orchestre de la sécurité email.</div></div></div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">DNS</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Annuaire d'internet. C'est là que sont publiées vos règles SPF, DKIM et DMARC. On peut les lire sans toucher à votre site.</div></div></div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">Usurpation</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Quand quelqu'un envoie un email en se faisant passer pour vous. Vos clients voient votre nom et votre adresse — mais c'est un escroc.</div></div></div></div>
+      <div class="gloss-card"><div class="gloss-inner"><div class="gloss-front"><div class="gloss-term">Phishing</div><div class="gloss-hint">↩ survoler</div></div><div class="gloss-back"><div class="gloss-def">Arnaque par email qui imite une entreprise de confiance pour voler des informations ou de l'argent. L'usurpation de domaine en est la forme la plus redoutable.</div></div></div></div>
     </div>
   </div>
 </section>
@@ -608,30 +474,210 @@ footer p { color:rgba(255,255,255,.45); font-size:.88rem; line-height:1.8; max-w
 </footer>
 
 <script>
+/* ── OFFRES TOGGLE ── */
 let isPackage = true;
-
 function toggleOffre() {
   isPackage = !isPackage;
-  const toggle = document.getElementById('offreToggle');
-  const pkg = document.getElementById('packageView');
-  const sep = document.getElementById('separateView');
-  const lblPkg = document.getElementById('lbl-package');
-  const lblSep = document.getElementById('lbl-separate');
-
-  toggle.classList.toggle('on', !isPackage);
-  pkg.style.display = isPackage ? 'block' : 'none';
-  sep.style.display = isPackage ? 'none' : 'grid';
-  lblPkg.classList.toggle('active', isPackage);
-  lblSep.classList.toggle('active', !isPackage);
+  document.getElementById('offreToggle').classList.toggle('on', !isPackage);
+  document.getElementById('packageView').style.display = isPackage ? 'block' : 'none';
+  document.getElementById('separateView').style.display = isPackage ? 'none' : 'grid';
+  document.getElementById('lbl-package').classList.toggle('active', isPackage);
+  document.getElementById('lbl-separate').classList.toggle('active', !isPackage);
 }
 
+/* ── SCROLL REVEAL ── */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+/* ── GLOSSAIRE FLIP ── */
 document.querySelectorAll('.gloss-card').forEach(c => {
   c.addEventListener('click', () => c.classList.toggle('flipped'));
+});
+
+/* ── DNS CHECKER ── */
+const DNS_API = 'https://dns.google/resolve';
+
+function cleanDomain(v) {
+  return v.trim().toLowerCase()
+    .replace(/^https?:\/\//,'').replace(/^www\./,'')
+    .replace(/\/.*$/,'').replace(/[^a-z0-9.\-]/g,'');
+}
+
+async function queryDNS(name, type) {
+  const r = await fetch(`${DNS_API}?name=${encodeURIComponent(name)}&type=${type}`);
+  if (!r.ok) throw new Error('DNS fail');
+  return r.json();
+}
+
+function cShow(id) {
+  ['c-idle','c-loading','c-results'].forEach(s =>
+    document.getElementById(s).style.display = s === id ? (id==='c-loading'?'block':'block') : 'none'
+  );
+}
+
+function cStep(id, state, txt) {
+  const el = document.getElementById(id);
+  el.className = 'c-step' + (state ? ' '+state : '');
+  el.textContent = (state==='done'?'✅ ':state==='active'?'⟳ ':'⏳ ') + txt;
+}
+
+async function startCheck() {
+  const domain = cleanDomain(document.getElementById('domainInput').value);
+  if (!domain || !domain.includes('.')) return;
+
+  document.getElementById('checkBtn').disabled = true;
+  cShow('c-loading');
+  document.getElementById('c-loading').style.display = 'block';
+
+  // reset steps
+  cStep('cs1','','Vérification SPF…');
+  cStep('cs2','','Vérification DMARC…');
+  cStep('cs3','','Vérification DKIM…');
+  cStep('cs4','','Calcul du score…');
+
+  try {
+    // SPF
+    cStep('cs1','active','Vérification SPF…');
+    const txtData = await queryDNS(domain, 'TXT');
+    const txts = (txtData.Answer||[]).map(r=>r.data.replace(/"/g,''));
+    const spf = txts.find(t=>t.startsWith('v=spf1'))||null;
+    cStep('cs1','done','SPF analysé');
+
+    // DMARC
+    cStep('cs2','active','Vérification DMARC…');
+    const dmData = await queryDNS('_dmarc.'+domain, 'TXT');
+    const dmarc = (dmData.Answer||[]).map(r=>r.data.replace(/"/g,'')).find(t=>t.startsWith('v=DMARC1'))||null;
+    cStep('cs2','done','DMARC analysé');
+
+    // DKIM
+    cStep('cs3','active','Vérification DKIM…');
+    let dkim = null, dkimSel = null;
+    for (const sel of ['default','google','mail','dkim','k1','selector1','selector2']) {
+      try {
+        const d = await queryDNS(`${sel}._domainkey.${domain}`, 'TXT');
+        const m = (d.Answer||[]).map(r=>r.data.replace(/"/g,'')).find(t=>t.includes('v=DKIM1')||t.includes('p='));
+        if (m) { dkim=m; dkimSel=sel; break; }
+      } catch(e){}
+    }
+    cStep('cs3','done','DKIM analysé');
+
+    cStep('cs4','active','Calcul du score…');
+    await new Promise(r=>setTimeout(r,400));
+    cStep('cs4','done','Score calculé');
+
+    renderCheckerResults(domain, analyze(domain, spf, dmarc, dkim, dkimSel));
+
+  } catch(e) {
+    cShow('c-idle');
+    document.getElementById('c-idle').innerHTML = '<div style="font-size:.75rem;color:#FCA5A5;text-align:center;">Domaine introuvable. Vérifiez l\'orthographe.</div>';
+    document.getElementById('checkBtn').disabled = false;
+  }
+}
+
+function analyze(domain, spf, dmarc, dkim, dkimSel) {
+  let score = 100;
+  const checks = [];
+
+  // SPF
+  let spfS, spfH, spfD;
+  if (!spf)                               { spfS='fail'; score-=35; spfH='SPF absent';         spfD='N\'importe quel serveur peut envoyer des emails en votre nom.'; }
+  else if (spf.includes('+all')||spf.includes('?all')) { spfS='warn'; score-=20; spfH='SPF trop permissif'; spfD='SPF existe mais autorise tout le monde. Presque sans effet.'; }
+  else if (spf.includes('~all'))          { spfS='warn'; score-=8;  spfH='SPF en mode doux';   spfD='Mode "softfail" : les emails suspects sont signalés mais pas bloqués.'; }
+  else                                    { spfS='ok';              spfH='SPF correct';         spfD='Seuls vos serveurs autorisés peuvent envoyer en votre nom.'; }
+  checks.push({name:'SPF',status:spfS,head:spfH,detail:spfD});
+
+  // DMARC
+  let dmS, dmH, dmD;
+  if (!dmarc)                             { dmS='fail'; score-=40; dmH='DMARC absent';          dmD='Sans DMARC, les emails frauduleux atteignent vos clients sans filtrage.'; }
+  else if (dmarc.includes('p=none'))      { dmS='warn'; score-=20; dmH='DMARC en surveillance'; dmD='Mode "none" : surveille sans bloquer. Aucune protection réelle.'; }
+  else if (dmarc.includes('p=quarantine')){ dmS='warn'; score-=5;  dmH='DMARC en quarantaine';  dmD='Bien. Les suspects vont en spam. Passer à "reject" pour le max.'; }
+  else                                    { dmS='ok';              dmH='DMARC en rejet';         dmD='Protection maximale : les faux emails sont rejetés avant livraison.'; }
+  checks.push({name:'DMARC',status:dmS,head:dmH,detail:dmD});
+
+  // DKIM
+  let dkS, dkH, dkD;
+  if (!dkim) { dkS='warn'; score-=15; dkH='DKIM non détecté'; dkD='Aucune signature numérique trouvée. Vos emails peuvent être altérés en transit.'; }
+  else       { dkS='ok';              dkH=`DKIM présent (${dkimSel})`; dkD='Vos emails sont signés numériquement. Toute modification sera détectée.'; }
+  checks.push({name:'DKIM',status:dkS,head:dkH,detail:dkD});
+
+  score = Math.max(0, Math.min(100, score));
+  const level = score>=85?'safe':score>=55?'medium':'danger';
+  const colors = {safe:'#4ADE80', medium:'#FCD34D', danger:'#F87171'};
+  const labels = {safe:'Protégé ✓', medium:'Partiel ⚠', danger:'Vulnérable ✗'};
+  const verdicts = {
+    safe:'Votre configuration email est solide. Vos clients sont protégés.',
+    medium:'Des lacunes subsistent. Un attaquant peut encore exploiter ces failles.',
+    danger:'Domaine exposé. Des arnaques peuvent être menées en votre nom dès maintenant.'
+  };
+  return {score, checks, level, color:colors[level], label:labels[level], verdict:verdicts[level]};
+}
+
+function renderCheckerResults(domain, a) {
+  document.getElementById('c-loading').style.display = 'none';
+  const res = document.getElementById('c-results');
+  res.style.display = 'block';
+
+  document.getElementById('c-domain-lbl').textContent = domain;
+  const badge = document.getElementById('c-score-badge');
+  badge.textContent = a.label;
+  badge.style.color = a.color;
+  document.getElementById('c-verdict').textContent = a.verdict;
+  document.getElementById('c-verdict').style.color = 'rgba(255,255,255,.6)';
+
+  // checks
+  const checksEl = document.getElementById('c-checks');
+  checksEl.innerHTML = '';
+  a.checks.forEach(c => {
+    const row = document.createElement('div');
+    row.innerHTML = `
+      <div class="c-check-row">
+        <span class="c-check-name">${c.name}</span>
+        <span class="c-check-status ${c.status}">${c.status==='ok'?'✓ OK':c.status==='warn'?'⚠ Partiel':'✗ Absent'}</span>
+      </div>
+      <div class="c-check-detail">${c.detail}</div>`;
+    checksEl.appendChild(row);
+  });
+
+  // CTA
+  const cta = document.getElementById('c-cta-block');
+  if (a.level === 'safe') {
+    cta.innerHTML = `
+      <div class="c-cta safe">
+        <div class="c-cta-title">Bonne configuration !</div>
+        <div class="c-cta-text">Vos protections email sont en place. Vous souhaitez un audit web complet ?</div>
+        <div class="c-cta-btns">
+          <a href="#contact" class="c-btn-main">Nous contacter</a>
+        </div>
+      </div>`;
+  } else {
+    const urgency = a.level==='danger'
+      ? 'Des failles critiques exposent vos clients à des arnaques en votre nom.'
+      : 'Votre protection est incomplète. Des correctifs sont nécessaires.';
+    cta.innerHTML = `
+      <div class="c-cta danger">
+        <div class="c-cta-title">Action recommandée</div>
+        <div class="c-cta-text">${urgency} Nous pouvons corriger ça pour vous.</div>
+        <div class="c-cta-btns">
+          <a href="#offres" class="c-btn-main">Voir le package 450€ →</a>
+          <button class="c-btn-sec" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Commencer par l'audit (150€)</button>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('checkBtn').disabled = false;
+}
+
+function resetChecker() {
+  document.getElementById('domainInput').value = '';
+  document.getElementById('c-results').style.display = 'none';
+  document.getElementById('c-idle').style.display = 'block';
+  document.getElementById('c-idle').innerHTML = '<div style="font-size:.75rem;color:rgba(255,255,255,.3);text-align:center;">Entrez votre domaine pour lancer l\'analyse SPF · DKIM · DMARC</div>';
+}
+
+document.getElementById('domainInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startCheck();
 });
 </script>
 </body>
